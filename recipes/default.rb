@@ -5,7 +5,7 @@ node[:deploy].each do |application, deploy|
     group deploy[:group]
     owner deploy[:user]
     mode "0644"
-    variables(:env => node[[:opsworks_env][:json_key]])
+    variables(:env => node[:opsworks_env][:json_key])
     # variables(:env => node[:custom_env][application])
     # notifies :restart, resources(:service => "redis")
   end
