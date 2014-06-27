@@ -6,7 +6,8 @@ node[:deploy].each do |application, deploy|
     owner  'root'
     mode   '0755'
     variables(:env => node[:custom_env][application])
-    # command node[:opsworks][:rails_stack][:restart_command]
-    # notifies :restart, resources(:service => 'redis')
+    if node[:opsworks].exist?(:rails_stack)
+      command node[:opsworks][:rails_stack][:restart_command]
+    end
   end
 end
