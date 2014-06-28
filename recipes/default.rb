@@ -6,10 +6,11 @@ node[:deploy].each do |application, deploy|
     owner  'root'
     mode   '0755'
     variables(:env => node[:custom_env][application])
-    if node[:opsworks].has_key?(:rails_stack)
-      execute "restart Rails app #{application}" do
-        command node[:opsworks][:rails_stack][:restart_command]
-      end
+  end
+
+  if node[:opsworks].has_key?(:rails_stack)
+    execute "restart Rails app #{application}" do
+      command node[:opsworks][:rails_stack][:restart_command]
     end
   end
 end
