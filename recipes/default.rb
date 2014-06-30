@@ -2,8 +2,7 @@ node[:deploy].each do |application, deploy|
   execute "restart Rails app #{application}" do
     if node[:opsworks].has_key?(:rails_stack)
       cwd deploy[:current_path]
-      command 'source /etc/profile.d/custom_env.sh'
-      command node[:opsworks][:rails_stack][:restart_command]
+      command "source /etc/profile.d/custom_env.sh; #{node[:opsworks][:rails_stack][:restart_command]}"
       action :nothing
     end
   end
