@@ -19,7 +19,7 @@ node[:deploy].each do |application, deploy|
 
   template 'use_custom_env.sh' do
     path   '/usr/local/bin'
-    source 'user_custom_env.sh.erb'
+    source 'use_custom_env.sh.erb'
     group  'root'
     owner  'root'
     mode   '0755'
